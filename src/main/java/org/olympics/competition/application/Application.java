@@ -2,6 +2,8 @@ package org.olympics.competition.application;
 
 import org.olympics.competition.business.domain.Athlete;
 import org.olympics.competition.exceptions.IncorrectParamException;
+import org.olympics.competition.service.calculation.ScoreCalculation;
+import org.olympics.competition.service.calculation.ScoreCalculationService;
 import org.olympics.competition.service.dataimport.ImportService;
 import org.olympics.competition.service.dataimport.ImportServiceEnum;
 
@@ -12,10 +14,16 @@ import java.util.logging.Logger;
 
 public class Application {
     private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
+    private final ScoreCalculation scoreCalculator;
+    private final String[] args;
 
-    public Application(String... args) {
-        initializeApp(args);
+    public Application(String[] args, ScoreCalculation scoreCalculator) {
+        this.args = args;
+        this.scoreCalculator = scoreCalculator;
+
+        this.initializeApp(args);
     }
+
 
     void initializeApp(String[] args) {
         validateArgs(args);
@@ -27,7 +35,13 @@ public class Application {
         ImportService<Athlete> fromCsv = inputDataType.create(args[1]);
 
         List<Athlete> athleteList = fromCsv.getAll();
+
         LOGGER.info(MessageFormat.format("Loaded athleteList = {0}", athleteList));
+
+        for (Athlete athlete: athleteList) {
+            int totalScore = this.scoreCalculator.getTotalScore(athlete.getPerformances());
+            System.out.println("athlete = " + athlete.getName() + " has total score = " + totalScore);
+        }
     }
 
     ImportServiceEnum getInputDataType(String inputDataType) {
@@ -49,12 +63,13 @@ public class Application {
 
     void validateArgs(String[] args) {
         if (args.length == 0) {
-            LOGGER.severe(MessageFormat.format("Insufficient arguments to run the application. Please specify the type of datasource and file path. Current valid values para datasource are: {0}", Arrays.asList(ImportServiceEnum.values())));
-            throw new IncorrectParamException(MessageFormat.format("Insufficient arguments to run the application. Please specify the type of data and file path. Current valid values para datasource are: {0}", Arrays.asList(ImportServiceEnum.values())));
+            LOGGER.severe(MessageFormat.format("Insufficient arguments to run the application. Please specify the type of datasource and file path. Current valid values to datasource are: {0}", Arrays.asList(ImportServiceEnum.values())));
+            throw new IncorrectParamException(MessageFormat.format("Insufficient arguments to run the application. Please specify the type of data and file path. Current valid values to datasource are: {0}", Arrays.asList(ImportServiceEnum.values())));
         }
     }
 
     public static void main(String... args) {
-        new Application(args);
+
+        new Application(args, new ScoreCalculationService());
     }
 }

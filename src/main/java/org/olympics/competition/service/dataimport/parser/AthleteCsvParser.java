@@ -13,8 +13,7 @@ public class AthleteCsvParser implements AthleteParser {
     public static final String CSV_DELIMITER = ";";
     public static final int NUMBER_OF_FIELDS = 11;
     public static final int MINUTE_TO_SEC = 60;
-    public static final String MILISECOND_DELIMITER = ".";
-    public static final String SECOND_DELIMITER = ":";
+    public static final String MILLISECOND_DELIMITER = ".";
 
     @Override
     public Athlete parse(String object) throws IncorrectFormatException {
@@ -40,8 +39,7 @@ public class AthleteCsvParser implements AthleteParser {
         String name = getNameFromLine(line);
         double[] performances = getPerformancesArray(line);
 
-        Athlete athlete = new Athlete(name, performances);
-        return athlete;
+        return new Athlete(name, performances);
     }
 
     String[] splitLine(String content, String pattern) {
@@ -91,8 +89,7 @@ public class AthleteCsvParser implements AthleteParser {
 
     private String getPerformancesFromLine(String content) {
         int firstDelimiterIndex = content.indexOf(CSV_DELIMITER);
-        String performances = content.substring(firstDelimiterIndex + 1);
-        return performances;
+        return content.substring(firstDelimiterIndex + 1);
     }
 
     String getNameFromLine(String line) {
@@ -109,7 +106,7 @@ public class AthleteCsvParser implements AthleteParser {
             } else if (isExpressedInMinutes(performancesSt[i])) {
                 String[] parts = performancesSt[i].split(":|\\.");
                 int minutes = Integer.parseInt(parts[0]);
-                performances[i] = minutesToSeconds(minutes) + Double.parseDouble(parts[1] + MILISECOND_DELIMITER + parts[2]);
+                performances[i] = minutesToSeconds(minutes) + Double.parseDouble(parts[1] + MILLISECOND_DELIMITER + parts[2]);
             }
 
         }
@@ -143,10 +140,9 @@ public class AthleteCsvParser implements AthleteParser {
 
     boolean hasValidPerformanceInSeconds(String performance) {
         final String regex = "^(?:[1-9]\\d*|0)?(?:\\.\\d+)?$";
-        final String string = performance; //"5.33";
 
         final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
-        final Matcher matcher = pattern.matcher(string);
+        final Matcher matcher = pattern.matcher(performance);
         return  matcher.matches();
     }
 

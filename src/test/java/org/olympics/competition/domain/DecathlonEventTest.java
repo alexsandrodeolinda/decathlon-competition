@@ -82,7 +82,7 @@ class DecathlonEventTest {
     @Test
     void calculateScore_WhenEventIsRun1500() {
         CombinedEvent event = DecathlonEvent.RUN_1500M;
-        int score = event.calculateScore(325.72); //5h:25m:72s -> 5h = 300min
+        int score = event.calculateScore(325.72); //5m:25s.72ss -> 5m = 300s + 25s + 0.72s = 325.72
         Assertions.assertEquals(421, score);
 
     }

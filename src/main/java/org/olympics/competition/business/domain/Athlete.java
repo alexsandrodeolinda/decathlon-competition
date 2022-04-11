@@ -3,7 +3,7 @@ package org.olympics.competition.business.domain;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Athlete implements Importable {
+public class Athlete {
     private String name;
     private double[] performances;
 
