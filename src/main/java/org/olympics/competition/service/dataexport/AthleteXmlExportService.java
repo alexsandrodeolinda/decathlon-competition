@@ -101,7 +101,7 @@ public class AthleteXmlExportService extends AbstractExportService<Athlete> impl
                 Element performance = doc.createElement("performance");
                 performance.setTextContent(String.valueOf(athlete.getPerformances()[i]));
                 event.appendChild(performance);
-                
+
                 allEventsElement.appendChild(event);
             }
 

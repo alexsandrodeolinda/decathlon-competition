@@ -45,6 +45,15 @@ public class AthleteCsvImportServiceTest {
     }
 
     @Test
+    void getAll_WhenFileFoundAndHasDrawRecords() {
+        ImportService<Athlete> service = new ImportServiceFactory().getImportService("csv", "src/test/resources/results-draw.csv");
+        List<Athlete> athletes = service.getAll();
+        Assertions.assertFalse(athletes.isEmpty());
+        Assertions.assertTrue( athletes.get(0).getTotalScore() == athletes.get(4).getTotalScore());
+
+    }
+
+    @Test
     void getAll_WhenFileFoundAndHasNoRecords() {
         ImportService<Athlete> service = new ImportServiceFactory().getImportService("csv", "src/test/resources/results-empty.csv");
         List<Athlete> athletes = service.getAll();
