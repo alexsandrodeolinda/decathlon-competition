@@ -1,4 +1,4 @@
-package org.olympics.competition.service.dataimport.file;
+package org.olympics.competition.service.dataimport;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,9 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.olympics.competition.business.domain.Athlete;
 import org.olympics.competition.exceptions.IncorrectFormatException;
 import org.olympics.competition.exceptions.IncorrectParamException;
-import org.olympics.competition.service.dataimport.AthleteCsvImportService;
-import org.olympics.competition.service.dataimport.ImportService;
-import org.olympics.competition.service.dataimport.ImportServiceFactory;
 import org.olympics.competition.service.dataimport.parser.Parser;
 
 import java.util.List;
@@ -71,5 +68,12 @@ public class AthleteCsvImportServiceTest {
         Mockito.lenient().when(parser.parse(line)).thenReturn(a);
 
         Assertions.assertEquals(a, ((AthleteCsvImportService)service).getAthleteFromLine(line));
+    }
+
+    @Test
+    void retrieveLinesFromFile() throws IncorrectFormatException {
+        ImportService<Athlete> service = new ImportServiceFactory().getImportService("csv", "src/test/resources/results-invalid.csv");
+
+        Assertions.assertThrows(IllegalArgumentException.class, () -> service.getAll());
     }
 }

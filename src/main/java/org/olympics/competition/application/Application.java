@@ -16,9 +16,10 @@ import org.olympics.competition.service.dataimport.ImportServiceFactory;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
+
+import static java.util.Comparator.comparing;
 
 public class Application {
     private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
@@ -60,7 +61,7 @@ public class Application {
             athlete.setTotalScore(totalScore);
         }
 
-        Ranking ranking = this.rankingService.buildOrderedRanking(athleteList, Comparator.comparing(Athlete::getTotalScore).reversed());
+        Ranking ranking = this.rankingService.buildOrderedRanking(athleteList, comparing(Athlete::getTotalScore).reversed());
         LOGGER.info("---- Ordered Ranking ----");
         for (Athlete a: ranking.getAthleteList()) {
             LOGGER.info(MessageFormat.format("athlete = {0}", a));

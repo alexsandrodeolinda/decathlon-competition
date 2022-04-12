@@ -84,8 +84,15 @@ public class AthleteCsvParserTest {
 
     @Test
     void lineHasExpectedPerformances_WhenIsInvalid() {
-        String line = "John Smith,5:25.72";
+        String line = "John Smith;5:25.72";
         AthleteCsvParser parser = new AthleteCsvParser();
         Assertions.assertFalse(parser.lineHasExpectedPerformances(line));
+    }
+
+    @Test
+    void hasValidPerformances_WhenIsInvalid() {
+        String line = "John Smith;5:25.72";
+        AthleteCsvParser parser = new AthleteCsvParser();
+        Assertions.assertFalse(parser.hasValidPerformances(line));
     }
 }

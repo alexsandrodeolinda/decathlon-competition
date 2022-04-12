@@ -7,7 +7,10 @@ public class ScoreCalculationService implements ScoreCalculation {
     public int getTotalScore(double[] performances) {
         int score = 0;
         for (int i = 0; i < performances.length; i++) {
-            score += DecathlonEvent.values()[i].calculateScore(performances[i]);
+            if (performances[i] > 0) {
+                score += DecathlonEvent.values()[i].calculateScore(performances[i]);
+            }
+
         }
         return score;
     }
