@@ -1,8 +1,15 @@
 package org.olympics.competition.business.domain;
 
-import java.util.Comparator;
-import java.util.Set;
+import java.util.*;
 
-public interface Ranking {
-    Set<Athlete> sortAthletes(Comparator<Result> athleteComparator);
+public class Ranking {
+    private List<Athlete> athleteList;
+
+    public Ranking(List<Athlete> athleteList) {
+        this.athleteList = athleteList;
+    }
+
+    public List<Athlete> getAthleteList() {
+        return athleteList;
+    }
 }

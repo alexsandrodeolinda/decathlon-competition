@@ -2,7 +2,6 @@ package org.olympics.competition.service.dataimport;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.olympics.competition.service.dataimport.file.AthleteCsvImportService;
 
 class ImportServiceFactoryTest {
 

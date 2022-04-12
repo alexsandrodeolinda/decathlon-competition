@@ -6,6 +6,8 @@ import java.util.Objects;
 public class Athlete {
     private String name;
     private double[] performances;
+    private int totalScore;
+    private String place;
 
     public Athlete() {
     }
@@ -28,7 +30,25 @@ public class Athlete {
         return "Athlete{" +
                 "name='" + name + '\'' +
                 ", performances=" + Arrays.toString(performances) +
+                ", totalScore=" + totalScore +
+                ", place=" + place +
                 '}';
+    }
+
+    public int getTotalScore() {
+        return totalScore;
+    }
+
+    public void setTotalScore(int totalScore) {
+        this.totalScore = totalScore;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 
     @Override
@@ -36,13 +56,11 @@ public class Athlete {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Athlete athlete = (Athlete) o;
-        return Objects.equals(name, athlete.name) && Arrays.equals(performances, athlete.performances);
+        return totalScore == athlete.totalScore;
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name);
-        result = 31 * result + Arrays.hashCode(performances);
-        return result;
+        return Objects.hash(totalScore);
     }
 }

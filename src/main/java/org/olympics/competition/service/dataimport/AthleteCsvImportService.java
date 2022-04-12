@@ -1,10 +1,8 @@
-package org.olympics.competition.service.dataimport.file;
+package org.olympics.competition.service.dataimport;
 
 import org.olympics.competition.business.domain.Athlete;
 import org.olympics.competition.exceptions.IncorrectFormatException;
 import org.olympics.competition.exceptions.IncorrectParamException;
-import org.olympics.competition.service.dataimport.AbstractImportService;
-import org.olympics.competition.service.dataimport.AthleteImportService;
 import org.olympics.competition.service.dataimport.parser.AthleteCsvParser;
 import org.olympics.competition.service.dataimport.parser.Parser;
 
@@ -22,7 +20,7 @@ public class AthleteCsvImportService extends AbstractImportService<Athlete> impl
     public static final String DELIMITER = ";";
     private String filePath;
 
-    public AthleteCsvImportService(String filePath) {
+    AthleteCsvImportService(String filePath) {
         this.filePath = filePath;
     }
 
@@ -70,7 +68,7 @@ public class AthleteCsvImportService extends AbstractImportService<Athlete> impl
         return records;
     }
     
-    protected Athlete getAthleteFromLine(String line) throws IncorrectFormatException {
+    public Athlete getAthleteFromLine(String line) throws IncorrectFormatException {
         Parser parser = new AthleteCsvParser();
         Athlete athlete = (Athlete) parser.parse(line);
 
