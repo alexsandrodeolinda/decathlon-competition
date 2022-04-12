@@ -44,26 +44,16 @@ public class Application {
         }
     }
 
-    ImportServiceEnum getInputDataType(String inputDataType) {
-        for (ImportServiceEnum type: ImportServiceEnum.values()) {
-            if (type.name().equals(inputDataType.toUpperCase())) {
-                return type;
-            }
-        }
-        LOGGER.severe(MessageFormat.format("Cannot find a valid dataSource of type {0}. Valid values are {1}.", inputDataType, Arrays.asList(ImportServiceEnum.values())));
-        throw new IncorrectParamException(MessageFormat.format("Cannot find a valid dataSource of type {0}", inputDataType));
-    }
-
     void validateArgsForDataType(ImportServiceEnum serviceType, String[] args) {
+        if (serviceType == null) {
+            LOGGER.severe(MessageFormat.format("Cannot find a valid dataSource of type {0}. Valid values are {1}.", args[0], Arrays.asList(ImportServiceEnum.values())));
+            throw new IncorrectParamException(MessageFormat.format("Cannot find a valid dataSource of type {0}", args[0]));
+        }
         if (serviceType.getNumberOfParameters() != args.length) {
             LOGGER.severe(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
             throw new IncorrectParamException(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
 
         }
-//        if (serviceType.equals(ImportServiceEnum.CSV) && args.length < 2) {
-//            LOGGER.severe(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
-//            throw new IncorrectParamException(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
-//        }
     }
 
     void validateArgs(String[] args) {
