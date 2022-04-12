@@ -6,6 +6,7 @@ import org.olympics.competition.service.calculation.ScoreCalculation;
 import org.olympics.competition.service.calculation.ScoreCalculationService;
 import org.olympics.competition.service.dataimport.ImportService;
 import org.olympics.competition.service.dataimport.ImportServiceEnum;
+import org.olympics.competition.service.dataimport.ImportServiceFactory;
 
 import java.text.MessageFormat;
 import java.util.Arrays;
@@ -15,12 +16,13 @@ import java.util.logging.Logger;
 public class Application {
     private static final Logger LOGGER = Logger.getLogger(Application.class.getName());
     private final ScoreCalculation scoreCalculator;
+    private final ImportServiceFactory importServiceFactory;
     private final String[] args;
 
-    public Application(String[] args, ScoreCalculation scoreCalculator) {
+    public Application(String[] args, ScoreCalculation scoreCalculator, ImportServiceFactory importServiceFactory) {
         this.args = args;
         this.scoreCalculator = scoreCalculator;
-
+        this.importServiceFactory = importServiceFactory;
         this.initializeApp(args);
     }
 
@@ -28,11 +30,9 @@ public class Application {
     void initializeApp(String[] args) {
         validateArgs(args);
 
-        ImportServiceEnum inputDataType = getInputDataType(args[0]);
+        validateArgsForDataType(ImportServiceEnum.getInputDataType(args[0]), args);
 
-        validateArgsForDataType(inputDataType, args);
-
-        ImportService<Athlete> fromCsv = inputDataType.create(args[1]);
+        ImportService<Athlete> fromCsv = importServiceFactory.getImportService(args[0], args[1]);
 
         List<Athlete> athleteList = fromCsv.getAll();
 
@@ -55,10 +55,15 @@ public class Application {
     }
 
     void validateArgsForDataType(ImportServiceEnum serviceType, String[] args) {
-        if (serviceType.equals(ImportServiceEnum.CSV) && args.length < 2) {
+        if (serviceType.getNumberOfParameters() != args.length) {
             LOGGER.severe(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
             throw new IncorrectParamException(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
+
         }
+//        if (serviceType.equals(ImportServiceEnum.CSV) && args.length < 2) {
+//            LOGGER.severe(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
+//            throw new IncorrectParamException(MessageFormat.format("Insufficient arguments to dataSource of type {0}. Please specify the type of datasource and file path.", serviceType.name()));
+//        }
     }
 
     void validateArgs(String[] args) {
@@ -70,6 +75,6 @@ public class Application {
 
     public static void main(String... args) {
 
-        new Application(args, new ScoreCalculationService());
+        new Application(args, new ScoreCalculationService(), new ImportServiceFactory());
     }
 }
