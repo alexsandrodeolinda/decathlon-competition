@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<decathlon>
+<ranking>
+<athlete>
+<name>John Smith</name>
+<totalScore>4200</totalScore>
+<place/>
+<events>
+<event>100-metre dash<performance>12.61</performance>
+</event>
+<event>Long Jump<performance>5.0</performance>
+</event>
+<event>Shot Put<performance>9.22</performance>
+</event>
+<event>High Jump<performance>1.5</performance>
+</event>
+<event>400-metre Dash<performance>60.39</performance>
+</event>
+<event>100-metre Hurdles<performance>16.43</performance>
+</event>
+<event>Discus throw<performance>21.6</performance>
+</event>
+<event>Pole Vault<performance>2.6</performance>
+</event>
+<event>Javelin Throw<performance>35.81</performance>
+</event>
+<event>1500-metre Run<performance>325.72</performance>
+</event>
+</events>
+</athlete>
+<athlete>
+<name>Luke Sky</name>
+<totalScore>7500</totalScore>
+<place/>
+<events>
+<event>100-metre dash<performance>13.04</performance>
+</event>
+<event>Long Jump<performance>4.53</performance>
+</event>
+<event>Shot Put<performance>7.79</performance>
+</event>
+<event>High Jump<performance>1.55</performance>
+</event>
+<event>400-metre Dash<performance>64.72</performance>
+</event>
+<event>100-metre Hurdles<performance>18.74</performance>
+</event>
+<event>Discus throw<performance>24.2</performance>
+</event>
+<event>Pole Vault<performance>2.4</performance>
+</event>
+<event>Javelin Throw<performance>28.2</performance>
+</event>
+<event>1500-metre Run<performance>411.01</performance>
+</event>
+</events>
+</athlete>
+</ranking>
+</decathlon>
