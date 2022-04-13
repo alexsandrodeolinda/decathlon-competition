@@ -1,12 +1,5 @@
 Hi everyone,
 
-I want to apologize for not being able to complete the exercise within the stipulated time. The last few weeks have been very hectic and I only managed to start on the weekend.
-I'm really enjoying doing the exercise, it's been challenging and has made me think a lot.
-As this week will probably be the same, I hope you don't mind giving me a little more time to finish.
-So far, I only managed to implement the data loading, but I still need to calculate the results, sort the ranking and export it.
-
-That said, when you run the application you will only see the list of loaded athletes printed on the console.
-
 
 ### To run the tests 
 #### 'mvn test'
