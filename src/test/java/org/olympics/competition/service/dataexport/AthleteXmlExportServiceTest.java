@@ -65,11 +65,5 @@ class AthleteXmlExportServiceTest {
         Assertions.assertThrows(FileExportException.class, () -> exportService.export(athletes));
     }
 
-    @Test
-    void insertElements() {
-    }
 
-    @Test
-    void createDocument() {
-    }
 }

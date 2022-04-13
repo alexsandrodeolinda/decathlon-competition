@@ -39,6 +39,7 @@ public class AthleteXmlExportService extends AbstractExportService<Athlete> impl
         if (this.filePath == null) {
             throw new FileExportException("File path must cannot be null");
         }
+        LOGGER.info(String.format("Export ranking to %s", filePath));
         Document doc = null;
         try {
             doc = createDocument();
