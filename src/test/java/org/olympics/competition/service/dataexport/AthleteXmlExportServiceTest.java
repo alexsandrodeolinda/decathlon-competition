@@ -30,6 +30,8 @@ class AthleteXmlExportServiceTest {
         Assertions.assertDoesNotThrow(() -> exportService.export(athletes));
         File output = new File(outputFile);
         File template = new File("src/test/resources/output-template.xml");
+        System.out.println("Files.readAllBytes(template.toPath() = " + Files.readAllBytes(template.toPath()).length);
+        System.out.println("Files.readAllBytes(output.toPath()).length = " + Files.readAllBytes(output.toPath()).length);
 
         Assertions.assertTrue(Arrays.equals(Files.readAllBytes(template.toPath()), Files.readAllBytes(output.toPath())));
     }
