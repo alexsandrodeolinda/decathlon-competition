@@ -25,7 +25,7 @@ class AthleteXmlExportServiceTest {
         lukeSky.setTotalScore(7500);
         athletes.add(lukeSky);
 
-        String outputFile = "src/test/resources/generated-output.xml";
+        String outputFile = System.getProperty("user.dir") + "/src/test/resources/generated-output.xml";
         ExportService<List<Athlete>> exportService = new AthleteXmlExportService(outputFile);
         Assertions.assertDoesNotThrow(() -> exportService.export(athletes));
         File output = new File(outputFile);
@@ -44,7 +44,7 @@ class AthleteXmlExportServiceTest {
         lukeSky.setTotalScore(7500);
         athletes.add(lukeSky);
 
-        String outputFile = "src/test/resources/generated-output-result.xml";
+        String outputFile = System.getProperty("user.dir") + "/src/test/resources/generated-output-result.xml";
         ExportService<List<Athlete>> exportService = new AthleteXmlExportService(outputFile);
         Assertions.assertDoesNotThrow(() -> exportService.export(athletes));
 
