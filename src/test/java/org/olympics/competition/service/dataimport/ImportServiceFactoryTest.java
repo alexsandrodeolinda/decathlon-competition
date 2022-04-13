@@ -12,4 +12,11 @@ class ImportServiceFactoryTest {
         Assertions.assertEquals(AthleteCsvImportService.class,
                 service.getClass());
     }
+
+    @Test
+    void getImportService_WhenDoesNotExist() {
+        ImportService service = new ImportServiceFactory().getImportService("txt", "file");
+        Assertions.assertNull(service);
+
+    }
 }

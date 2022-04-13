@@ -13,4 +13,12 @@ class ExportServiceFactoryTest {
                 service.getClass());
 
     }
+
+    @Test
+    void getExportService_WhenDoesNotExist() {
+        ExportService service = new ExportServiceFactory().getExportService("db", "jdbc://abscd/db_des_SQLServer:3441");
+        Assertions.assertNull(service);
+
+
+    }
 }
